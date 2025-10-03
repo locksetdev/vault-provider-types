@@ -1,0 +1,10 @@
+[package]
+name = "lockset_vault_provider"
+version = "0.1.0"
+edition = "2024"
+description = "Vault Provider types for Lockset Vault"
+license = "MIT"
+
+[dependencies]
+thiserror = "2.0.17"
+async-trait = "0.1.89"
