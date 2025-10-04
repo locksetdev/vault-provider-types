@@ -1,4 +1,5 @@
 use thiserror::Error;
+use zeroize::Zeroizing;
 
 #[derive(Error, Debug)]
 pub enum ProviderError {
@@ -12,7 +13,7 @@ pub enum ProviderError {
 
 /// Represents a secret retrieved from a provider.
 pub struct ProviderSecret {
-    pub value: String,
+    pub value: Zeroizing<String>,
     pub version: Option<String>,
 }
 
@@ -27,8 +28,8 @@ pub trait VaultProvider: Send + Sync {
 #[async_trait::async_trait]
 pub trait VaultProviderFactory: Send + Sync {
     /// Validates the configuration and connectivity to the external vault.
-    async fn validate(&self, config: &str) -> Result<(), ProviderError>;
+    async fn validate(&self, config: &Zeroizing<String>) -> Result<(), ProviderError>;
 
     /// Creates a new `VaultProvider` instance from a configuration string.
-    async fn create(&self, config: &str) -> Result<Box<dyn VaultProvider>, ProviderError>;
+    async fn create(&self, config: Zeroizing<String>) -> Result<Box<dyn VaultProvider>, ProviderError>;
 }
