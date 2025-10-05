@@ -1,6 +1,6 @@
 [package]
 name = "lockset_vault_provider"
-version = "0.1.1-alpha.1"
+version = "0.1.1"
 edition = "2024"
 description = "Vault Provider types for Lockset Vault"
 license = "MIT"
